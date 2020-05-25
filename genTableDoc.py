@@ -15,7 +15,7 @@ import xlwt
 '''
 
 
-class GenTableSchemal(object):
+class GenTableDoc(object):
     def __init__(self, connect, database):
         self.db = con(f"mysql+pymysql://{connect}")
         self.database = database
@@ -27,7 +27,9 @@ class GenTableSchemal(object):
     def _sqls(self, id):
         """
         sql语句
-        :param id:0：查询某数据库的表列表 1：根据表名查询表结构
+        :param id:
+                0：查询某数据库的表列表
+                1：根据表名查询表结构
         :return:
         """
         if id == 0:
@@ -140,7 +142,7 @@ class GenTableSchemal(object):
                 num_l += 1
         writebook.save(excelName)  # 一定要记得保存
 
-    def queryDb(self):
+    def start(self):
         """
         查询表列表
         :return:
@@ -155,5 +157,4 @@ class GenTableSchemal(object):
 
 
 if __name__ == '__main__':
-    schemal = GenTableSchemal('root:123456@127.0.0.1:3306', 'mysql')
-    schemal.queryDb()
+    GenTableDoc(connect='root:123456@127.0.0.1:3306', database='mysql').start()
